@@ -1,17 +1,14 @@
-#define CONFIG_WIRELESS
-#define ZMK_BASE_LAYER(name, LT, RT, LM, RM, LB, RB, LH, RH)                   \
-    ZMK_LAYER(                                                                 \
-        name,                                                                  \
-               XXX LT         XXX     RT XXX                                   \
-               XXX LM     XXX XXX XXX RM XXX                                   \
-               XXX LB XXX     XXX     RB XXX                                   \
-        &kp LGUI LH RH &smart_mouse \
-    )
+/* #define CONFIG_WIRELESS */
+/* #define ZMK_BASE_LAYER(name, LT, RT, LM, RM, LB, RB, LH, RH)                   \ */
+/*     ZMK_LAYER(                                                                 \ */
+/*         name,                                                                  \ */
+/*                XXX LT         XXX     RT XXX                                   \ */
+/*                XXX LM     XXX XXX XXX RM XXX                                   \ */
+/*                XXX LB XXX     XXX     RB XXX                                   \ */
+/*         &kp LGUI LH RH &smart_mouse \ */
+/*     ) */
 
 #include "zmk-helpers/key-labels/eyelash42.h"
 #include "base.keymap"
-<<<<<<< Updated upstream
 
 /* /{ chosen { zmk,physical-layout = &foostan_corne_5col_layout; }; }; */
-=======
->>>>>>> Stashed changes
