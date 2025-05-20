@@ -1,0 +1,5 @@
+#define CONFIG_WIRELESS
+#define HOST_OS 2
+
+#include "zmk-helpers/key-labels/eyelash42.h"
+#include "base.keymap"
