@@ -14,11 +14,29 @@
         }; \
     };
 
+/* ZMK_MACRO(aerorpace-service, bindings = <&kp LA(LC(KP_PLUS))>; wait-ms = <0>; tap-ms = <5>;) */
+/* ZMK_MACRO(aerorpace-window, bindings = <&kp LA(LC(KP_DOT))>; wait-ms = <0>; tap-ms = <5>;) */
+/* ZMK_MACRO(aerorpace-apps, bindings = <&kp LA(LC(KP_MINUS))>; wait-ms = <0>; tap-ms = <5>;) */
+/* ZMK_MACRO(aerorpace-workspace, bindings = <&kp LA(LC(KP_MULTIPLY))>; wait-ms = <0>; tap-ms = <5>;) */
+
 /* German umlauts */
-ZMK_LEADER_SEQUENCE(de_ae,      &de_ae,         A)  // ä
-ZMK_LEADER_SEQUENCE(de_oe,      &de_oe,         O)  // ö
-ZMK_LEADER_SEQUENCE(de_ue,      &de_ue,         U)  // ü
-ZMK_LEADER_SEQUENCE(de_eszett,  &de_eszett,     S)  // ß
+/* ZMK_LEADER_SEQUENCE(de_ae,      &de_ae,         A)  // ä */
+/* ZMK_LEADER_SEQUENCE(de_oe,      &de_oe,         O)  // ö */
+/* ZMK_LEADER_SEQUENCE(de_ue,      &de_ue,         U)  // ü */
+/* ZMK_LEADER_SEQUENCE(de_eszett,  &de_eszett,     S)  // ß */
+
+ZMK_LEADER_SEQUENCE(pt_a_grave,        &pt_a_grave,    A I)  // à
+ZMK_LEADER_SEQUENCE(pt_aa,             &pt_aa,   A SQT)  // á
+ZMK_LEADER_SEQUENCE(pt_a_circumflex,   &pt_a_circumflex, A CARET)  // â
+ZMK_LEADER_SEQUENCE(pt_a_tilde,        &pt_a_tilde,   A TILDE)  // ã
+
+
+
+/* Aerospace Combos */
+/* ZMK_LEADER_SEQUENCE(aw_left, &pt_a_tilde, a i) */
+/* ZMK_LEADER_SEQUENCE(pt_a_tildeearstasrtee,        &pt_a_tilde,   A I)  // ã */
+
+/* ZMK_LEADER_SEQUENCE(pt_a_tildeeessse,        &pt_a_tilde,   a i)  // ã */
 
 /* Greek letters */
 ZMK_LEADER_SEQUENCE(el_alpha,   &el_alpha,      E A)  // α

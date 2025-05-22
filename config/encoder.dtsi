@@ -1,0 +1,66 @@
+#include <behaviors.dtsi>
+
+/ {
+	behaviors {
+		rgb_encoder: rgb_encoder {
+			compatible = "zmk,behavior-sensor-rotate";
+			#sensor-binding-cells = <0>;
+			bindings = <&rgb_ug RGB_BRI>, <&rgb_ug RGB_BRD>;
+		};
+		
+		arrow_encoder: arrow_encoder {
+			compatible = "zmk,behavior-sensor-rotate";
+			#sensor-binding-cells = <0>;
+			bindings = <&enc_cw_morph_arrow>, <&enc_ccw_morph_arrow>;
+		};
+		
+		enc_cw_morph_arrow: enc_cw_morph_arrow {
+			compatible = "zmk,behavior-mod-morph";
+			#binding-cells = <0>;
+			bindings = <&kp UP>, <&kp RIGHT>;
+			mods = <(MOD_RCTL|MOD_LCTL)>;
+		};
+		
+		enc_ccw_morph_arrow: enc_ccw_morph_arrow {
+			compatible = "zmk,behavior-mod-morph";
+			#binding-cells = <0>;
+			bindings = <&kp DOWN>, <&kp LEFT>;
+			mods = <(MOD_RCTL|MOD_LCTL)>;
+		};
+		
+		// TODO scroll wheel for encoder with morphing
+		scroll_encoder: scroll_encoder {
+			compatible = "zmk,behavior-sensor-rotate";
+			#sensor-binding-cells = <0>;
+			bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+			tap-ms = <20>;
+		};
+
+    media_control: media_control { 
+      compatible = "zmk,behavior-sensor-rotate";
+      #sensor-binding-cells = <0>; \
+      bindings = <&kp C_RW>, <&kp C_FF>; \
+    }; 
+		
+		enc_cw_morph_scroll: enc_cw_morph_scroll {
+			compatible = "zmk,behavior-mod-morph";
+			#binding-cells = <0>;
+			bindings = <&msc SCRL_UP>, <&msc SCRL_RIGHT>;
+			mods = <(MOD_RCTL|MOD_LCTL)>;
+		};
+		
+		enc_ccw_morph_scroll: enc_ccw_morph_scroll {
+			compatible = "zmk,behavior-mod-morph";
+			#binding-cells = <0>;
+			bindings = <&msc SCRL_DOWN>, <&msc SCRL_LEFT>;
+			mods = <(MOD_RCTL|MOD_LCTL)>;
+		};
+	};
+	
+	// TODO dynamic encoder toggle behavior based on boolean or integer flag
+	// &encoder {
+	//     compatible = "zmk,behavior-encoder";
+	//     sensor-bindings = <&encoder_toggle 0 &rot_kp VOL_UP VOL_DOWN>,
+	//                       <&encoder_toggle 1 &rot_kp PG_UP PG_DN>;
+	// };
+};
