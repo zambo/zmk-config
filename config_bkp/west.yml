@@ -24,6 +24,8 @@ manifest:
   remotes:
     - name: urob
       url-base: https://github.com/urob
+    - name: m165437
+      url-base: https://github.com/M165437
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
     - name: zmk-new_corne
@@ -39,6 +41,9 @@ manifest:
       import: config/west.yml
 
     # ZMK modules
+    - name: nice-view-gem #new entry
+      remote: m165437 #new entry
+      revision: main #new entry
     - name: zmk-adaptive-key
       path: modules/zmk/adaptive-key
     - name: zmk-auto-layer
@@ -65,6 +70,7 @@ manifest:
           - hal_stm32
           - lvgl
           - tinycrypt
+          # - nice_view_gem
           - nice_view
 
   self:
