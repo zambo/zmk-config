@@ -9,7 +9,7 @@ parse_config:
   mark_alternate_layer_activators: true
   sticky_label: $$mdi:gesture-tap-hold$$
   trans_legend:
-    tap: $$mdi:transfer$$
+    tap: $$mdi:circle-medium$$
     type: trans
 
   raw_binding_map:
@@ -21,24 +21,35 @@ parse_config:
       tap: $$mdi:backup-restore$$
       type: bootloader
 
-    # Bluetooth
+    # Bluetooth with numeric legends - bluetooth icon + number with tighter spacing
     "&bt BT_SEL 0":
+      tap: $$mdi:bluetooth-connect$$
       hold: "1"
-      shifted: $$mdi:bluetooth-connect$$
-      tap: BT
     "&bt BT_SEL 1":
+      tap: $$mdi:bluetooth-connect$$
       hold: "2"
-      shifted: $$mdi:bluetooth-connect$$
-      tap: BT
     "&bt BT_SEL 2":
+      tap: $$mdi:bluetooth-connect$$
       hold: "3"
-      shifted: $$mdi:bluetooth-connect$$
-      tap: BT
     "&bt BT_SEL 3":
+      tap: $$mdi:bluetooth-connect$$
       hold: "4"
-      shifted: $$mdi:bluetooth-connect$$
-      tap: BT
     "&bt BT_CLR": $$mdi:bluetooth-off$$
+
+    # Custom behaviors
+    "&copy_cut": $$mdi:content-copy$$
+    "&swapper": $$mdi:swap-horizontal$$
+    "&select_word": $$mdi:select-all$$
+    "&select_line": $$mdi:format-line-height$$
+    "&comma_morph":
+      tap: ","
+      shifted: ";"
+    "&dot_morph":
+      tap: "."
+      shifted: ":"
+    "&qexcl":
+      tap: "?"
+      shifted: "!"
 
     # Layer management
     "&magic_shift":
@@ -68,6 +79,130 @@ parse_config:
       tap: "Numword"
       shifted: "Sticky Num"
 
+    # RGB Underglow controls
+    "&rgb_ug RGB_TOG": $$mdi:lightbulb$$
+    "&rgb_ug RGB_BRI": $$mdi:brightness-6$$
+    "&rgb_ug RGB_BRD": $$mdi:brightness-4$$
+    "&rgb_ug RGB_HUI": $$mdi:palette$$
+    "&rgb_ug RGB_HUD": $$mdi:palette-outline$$
+    "&rgb_ug RGB_SAI": $$mdi:water-plus$$
+    "&rgb_ug RGB_SAD": $$mdi:water-minus$$
+    "&rgb_ug RGB_SPI": $$mdi:speedometer$$
+    "&rgb_ug RGB_SPD": $$mdi:speedometer-slow$$
+    "&rgb_ug RGB_EFF": $$mdi:creation$$
+
+    # Numpad key bindings - cleaner display
+    "&kp KP_N0": "0"
+    "&kp KP_N1": "1"
+    "&kp KP_N2": "2"
+    "&kp KP_N3": "3"
+    "&kp KP_N4": "4"
+    "&kp KP_N5": "5"
+    "&kp KP_N6": "6"
+    "&kp KP_N7": "7"
+    "&kp KP_N8": "8"
+    "&kp KP_N9": "9"
+    "&kp KP_DOT": "."
+    "&kp KP_PLUS": "+"
+    "&kp KP_MINUS": "-"
+    "&kp KP_MULTIPLY": "×"
+    "&kp KP_DIVIDE": "÷"
+    "&kp KP_EQUAL": "="
+    "&kp KP_ENTER": $$mdi:keyboard-return$$
+    "&kp KP_COMMA": ","
+
+    # Standard number keys
+    "&kp N0": "0"
+    "&kp N1": "1"
+    "&kp N2": "2"
+    "&kp N3": "3"
+    "&kp N4": "4"
+    "&kp N5": "5"
+    "&kp N6": "6"
+    "&kp N7": "7"
+    "&kp N8": "8"
+    "&kp N9": "9"
+
+    # Combo symbol mappings - display actual symbols instead of descriptive names
+    "&kp AMPS": "&" # Ampersand
+    "&kp PERCENT": "%" # Percent
+    "&kp UNDER": "_" # Underscore
+    "&kp BSLH": '\' # Backslash
+    "&kp PIPE": "|" # Pipe
+    "&kp QUOT": '"' # Quote
+    "&kp EQL": "=" # Equals
+    "&kp FSLH": "/" # Forward slash
+    "&kp AT": "@" # At symbol
+    "&kp GRAVE": "`" # Grave
+    "&kp LT": "<" # Less than
+    "&kp GT": ">" # Greater than
+    "&kp CARET": "^" # Caret
+    "&kp DLLR": "$" # Dollar
+    "&kp MINUS": "-" # Minus/Dash
+    "&kp PLUS": "+" # Plus
+    "&kp LBRC": "{" # Left brace
+    "&kp RBRC": "}" # Right brace
+    "&kp LPAR": "(" # Left parenthesis
+    "&kp RPAR": ")" # Right parenthesis
+    "&kp LBKT": "[" # Left bracket
+    "&kp RBKT": "]" # Right bracket
+    "&kp STAR": "*" # Star/Asterisk
+    "&kp HASH": "#" # Hash
+    "&kp TILDE": "~" # Tilde
+    "&kp COLON": ":" # Colon
+    "&kp EXCL": "!" # Exclamation
+    "&kp SEMI": ";" # Semicolon
+
+    # Quote symbols
+    "&kp SQT": "'" # Single quote
+    SQT: "'" # Single quote keycode
+
+    # CANCEL macro mapping
+    CANCEL: $$mdi:close-circle$$
+
+    # Additional key mappings
+    "&kp RET": $$mdi:keyboard-return$$
+    RET: $$mdi:keyboard-return$$
+    "&kp LGUI": $$mdi:apple-keyboard-command$$
+    "&kp RGUI": $$mdi:apple-keyboard-command$$
+    GUI: $$mdi:apple-keyboard-command$$
+    "&kp KP_SLASH": "÷"
+    "&kp KP_FSLH": "÷"
+    "KP SLASH": "÷"
+
+    # Mouse movement controls - using directional arrow icons like nav layer
+    "&mmv MOVE_UP": $$mdi:arrow-up-bold-circle$$
+    "&mmv MOVE_DOWN": $$mdi:arrow-down-bold-circle$$
+    "&mmv MOVE_LEFT": $$mdi:arrow-left-bold-circle$$
+    "&mmv MOVE_RIGHT": $$mdi:arrow-right-bold-circle$$
+
+    # Mouse scroll controls - using mouse-move icons
+    "&msc SCRL_UP": $$mdi:mouse-move-up$$
+    "&msc SCRL_DOWN": $$mdi:mouse-move-down$$
+    "&msc SCRL_LEFT": $$mdi:mouse-move-vertical$$
+    "&msc SCRL_RIGHT": $$mdi:mouse-move-vertical$$
+
+    # Mouse click controls - specific click icons
+    "&mkp LCLK": $$mdi:mouse-left-click$$
+    "&mkp RCLK": $$mdi:mouse-right-click$$
+    "&mkp MCLK": $$mdi:mouse-scroll-wheel$$
+
+    # Macro wrapper for layer tap with key repeat
+    "&mcr_repeat":
+      tap: $$mdi:repeat$$
+      hold: Macro
+
+    # Smart number behavior
+    "&smart_num":
+      tap: $$mdi:pin$$
+      hold: Num
+      shifted: $$mdi:numeric$$
+
+    # Math and special symbols for numpad layers
+    "&kp ASTRSK": "*"
+    "&kp ASTERISK": "*"
+    "&kp DOLLAR": "$"
+
   zmk_keycode_map:
     # Enhanced modifiers with icons
     LCTRL: $$mdi:apple-keyboard-control$$
@@ -82,7 +217,101 @@ parse_config:
     RGUI: $$mdi:apple-keyboard-command$$
 
     # Special modifier combinations
-    LS(LC(LALT)): $$mdi:triangle$$  # Meh key
+    LS(LC(LALT)): $$mdi:triangle$$ # Meh key
+
+    # Custom application and system keys
+    GLOBE: $$mdi:web$$
+    APP_EXPOSE: $$mdi:view-grid$$
+    MISSION_CTL: $$mdi:view-dashboard$$
+    APP_SWITCH: $$mdi:dock-window$$
+    SMART_PAD: $$mdi:gesture-tap$$
+    MAGIC_SHIFT: $$mdi:auto-fix$$
+    KEY_REPEAT: $$mdi:repeat$$
+    "&kp K_CANCEL": $$mdi:close-circle$$
+    XXX: $$mdi:cancel$$ # For disabled keys
+
+    # Scrolling keys
+    SCROLL_UP: $$mdi:arrow-up-circle$$
+    SCROLL_DN: $$mdi:arrow-down-circle$$
+    SCRL_UP: $$mdi:arrow-up-circle$$
+
+    # Mouse controls - homerow layout: left, down, up, right
+    U_MS_U: $$mdi:arrow-up-bold-circle$$
+    U_MS_D: $$mdi:arrow-down-bold-circle$$
+    U_MS_L: $$mdi:arrow-left-bold-circle$$
+    U_MS_R: $$mdi:arrow-right-bold-circle$$
+    U_WH_U: $$mdi:mouse-move-up$$
+    U_WH_D: $$mdi:mouse-move-down$$
+
+    # Joystick/directional controls
+    J_UP: $$mdi:arrow-up$$
+    J_DW: $$mdi:arrow-down$$
+    J_LF: $$mdi:arrow-left$$
+    J_RH: $$mdi:arrow-right$$
+    J_CT: $$mdi:circle-medium$$
+
+    # Numpad keys - cleaner display
+    KP_N0: "0"
+    KP_N1: "1"
+    KP_N2: "2"
+    KP_N3: "3"
+    KP_N4: "4"
+    KP_N5: "5"
+    KP_N6: "6"
+    KP_N7: "7"
+    KP_N8: "8"
+    KP_N9: "9"
+    KP_DOT: "."
+    KP_PLUS: "+"
+    KP_MINUS: "-"
+    KP_MULTIPLY: "×"
+    KP_DIVIDE: "÷"
+    KP_EQUAL: "="
+    KP_ENTER: $$mdi:keyboard-return$$
+    KP_COMMA: ","
+
+    # Alternative: Visual numpad with badges (uncomment to use)
+    # KP_N0: $$mdi:numeric-0-circle$$
+    # KP_N1: $$mdi:numeric-1-circle$$
+    # KP_N2: $$mdi:numeric-2-circle$$
+    # KP_N3: $$mdi:numeric-3-circle$$
+    # KP_N4: $$mdi:numeric-4-circle$$
+    # KP_N5: $$mdi:numeric-5-circle$$
+    # KP_N6: $$mdi:numeric-6-circle$$
+    # KP_N7: $$mdi:numeric-7-circle$$
+    # KP_N8: $$mdi:numeric-8-circle$$
+    # KP_N9: $$mdi:numeric-9-circle$$
+
+    # Alternative: Icon-based math operations (uncomment to use)
+    # KP_PLUS: $$mdi:plus$$
+    # KP_MINUS: $$mdi:minus$$
+    # KP_MULTIPLY: $$mdi:close$$
+    # KP_DIVIDE: $$mdi:division$$
+    # KP_EQUAL: $$mdi:equal$$
+
+    # Function keys with keyboard icons
+    F1: $$mdi:keyboard-f1$$
+    F2: $$mdi:keyboard-f2$$
+    F3: $$mdi:keyboard-f3$$
+    F4: $$mdi:keyboard-f4$$
+    F5: $$mdi:keyboard-f5$$
+    F6: $$mdi:keyboard-f6$$
+    F7: $$mdi:keyboard-f7$$
+    F8: $$mdi:keyboard-f8$$
+    F9: $$mdi:keyboard-f9$$
+    F10: $$mdi:keyboard-f10$$
+    F11: $$mdi:keyboard-f11$$
+    F12: $$mdi:keyboard-f12$$
+
+    # Layer names for better visualization
+    DEF: $$mdi:keyboard$$
+    NAV: $$mdi:navigation$$
+    NUM: $$mdi:numeric$$
+    FN: $$mdi:function$$
+    SYS: $$mdi:cog$$
+    MCR: $$mdi:macro$$
+    MIC: $$mdi:mouse$$
+    PAD: $$mdi:gamepad$$
 
     # Navigation arrows
     UP: $$mdi:arrow-up-bold$$
@@ -165,7 +394,7 @@ parse_config:
     ENTER:
       type: enter
       tap: $$mdi:keyboard-return$$
-    ESC: $$mdi:keyboard-esc$$
+    ESC: $$mdi:repeat$$
     TAB: $$mdi:keyboard-tab$$
     SPACE: $$mdi:keyboard-space$$
     BACKSPACE:
@@ -212,26 +441,26 @@ draw_config:
   key_h: 60
   key_rx: 6
   key_ry: 6
-  
+
   # Combo styling
   combo_w: 28
   combo_h: 26
-  
-  # Spacing
+
+  # Spacing - tighter margins for better centering
   inner_pad_w: 2
-  inner_pad_h: 2
+  inner_pad_h: 1
   outer_pad_w: 30
   outer_pad_h: 56
-  
-  # Text styling
-  line_spacing: 1.2
+
+  # Text styling - very tight spacing for center alignment
+  line_spacing: 0.6
   shrink_wide_legends: 7
   append_colon_to_layer_header: false
-  
-  # Glyph sizes
+
+  # Glyph sizes - main icons normal, numbers smaller
   glyph_tap_size: 14
-  glyph_hold_size: 12
-  glyph_shifted_size: 10
+  glyph_hold_size: 8
+  glyph_shifted_size: 8
 
   # Clean, modern styling inspired by the example
   svg_style: |
@@ -243,36 +472,97 @@ draw_config:
     /* font and background color specifications */
     svg.keymap {
         /* Color palette */
-        --color-bg: #fafafa;
+        --color-bg: #fafaf9;
         --color-text: #37474f;
-        
-        /* Key colors */
+
+        /* Base key colors */
         --color-key-bg: #ffffff;
         --color-key-border: #e0e0e0;
         --color-key-text: #37474f;
         --color-key-secondary: #78909c;
-        
-        /* Layer-specific colors */
-        --color-base-bg: #ffffff;
-        --color-base-border: #e8eaf6;
+
+        /* Base/Default layer */
+        --color-base-bg: #f8f9fa;
+        --color-base-border: #dee2e6;
+        --color-base-text: #37474f;
+
+        /* Navigation layer */
         --color-nav-bg: #e8f5e8;
         --color-nav-border: #c8e6c9;
+        --color-nav-text: #2e7d32;
+
+        /* Function layer */
         --color-fn-bg: #fff3e0;
         --color-fn-border: #ffcc80;
+        --color-fn-text: #e65100;
+
+        /* Number layer */
         --color-num-bg: #f3e5f5;
         --color-num-border: #ce93d8;
+        --color-num-text: #7b1fa2;
+
+        /* System layer */
         --color-sys-bg: #ffebee;
         --color-sys-border: #ffcdd2;
-        
+        --color-sys-text: #c62828;
+
+        /* Macro layer */
+        --color-macro-bg: #e0f2f1;
+        --color-macro-border: #80cbc4;
+        --color-macro-text: #00695c;
+
+        /* Mouse layer */
+        --color-mouse-bg: #fce4ec;
+        --color-mouse-border: #f8bbd9;
+        --color-mouse-text: #880e4f;
+
+        /* Pad layer */
+        --color-pad-bg: #f1f8e9;
+        --color-pad-border: #c5e1a5;
+        --color-pad-text: #33691e;
+
+    /* Inactive/Transparent key styling */
+    --color-trans-bg: #e7e5e4;
+    --color-trans-border: #d6d3d1;
+    --color-trans-text: #a6a09b;
+    --trans-opacity: 0.3;
+
+        /* Thumb key colors per layer - for active state indication */
+        --color-thumb-base-bg: var(--color-base-bg);
+        --color-thumb-base-border: var(--color-base-border);
+        --color-thumb-nav-bg: var(--color-nav-bg);
+        --color-thumb-nav-border: var(--color-nav-border);
+        --color-thumb-fn-bg: var(--color-fn-bg);
+        --color-thumb-fn-border: var(--color-fn-border);
+        --color-thumb-num-bg: var(--color-num-bg);
+        --color-thumb-num-border: var(--color-num-border);
+        --color-thumb-sys-bg: var(--color-sys-bg);
+        --color-thumb-sys-border: var(--color-sys-border);
+        --color-thumb-macro-bg: var(--color-macro-bg);
+        --color-thumb-macro-border: var(--color-macro-border);
+        --color-thumb-mouse-bg: var(--color-mouse-bg);
+        --color-thumb-mouse-border: var(--color-mouse-border);
+        --color-thumb-pad-bg: var(--color-pad-bg);
+        --color-thumb-pad-border: var(--color-pad-border);
+
+        /* Enhanced thumb highlighting - brighter colors for active states */
+        --color-thumb-active-bg: #4caf50;
+        --color-thumb-active-border: #388e3c;
+        --color-thumb-active-text: #ffffff;
+
         /* Modifier keys */
         --color-mod-bg: #e3f2fd;
         --color-mod-border: #bbdefb;
-        
+
         /* Combo colors */
-        --color-combo-bg: #f5f5f5;
-        --color-combo-border: #e0e0e0;
-        --color-combo-text: #616161;
-        
+        --color-combo-bg: #fff9c4;
+        --color-combo-border: #f9a825;
+        --color-combo-text: #e65100;
+
+        /* Keys underneath combos - separate from regular base keys */
+        --color-combo-key-bg: #f0f0f0;
+        --color-combo-key-border: #d0d0d0;
+
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'SF Pro Display', sans-serif;
         font-size: 20px;
         font-weight: 600;
@@ -296,18 +586,19 @@ draw_config:
         dominant-baseline: middle;
         line-height: 1;
     }
-    
+
     .tap {
       fill: var(--color-key-text);
     }
-    
+
     .hold {
       fill: var(--color-key-secondary);
-      font-size: 16px;
+      font-size: 10px;
       text-anchor: middle;
-      dominant-baseline: ideographic;
+      dominant-baseline: hanging;
+      transform: translateY(-8px);
     }
-    
+
     .shifted {
       fill: var(--color-key-secondary);
       font-size: 16px;
@@ -320,21 +611,127 @@ draw_config:
       fill: var(--color-nav-bg);
       stroke: var(--color-nav-border);
     }
-    
+
+    .layer-Nav .tap {
+      fill: var(--color-nav-text);
+    }
+
     .layer-Fn rect.key {
       fill: var(--color-fn-bg);
       stroke: var(--color-fn-border);
     }
-    
+
+    .layer-Fn .tap {
+      fill: var(--color-fn-text);
+    }
+
     .layer-Num rect.key {
       fill: var(--color-num-bg);
       stroke: var(--color-num-border);
     }
 
-    .layer-Sys rect.key,
-    .layer-Mouse rect.key {
+    .layer-Num .tap {
+      fill: var(--color-num-text);
+    }
+
+    .layer-Sys rect.key {
       fill: var(--color-sys-bg);
       stroke: var(--color-sys-border);
+    }
+
+    .layer-Sys .tap {
+      fill: var(--color-sys-text);
+    }
+
+    .layer-Mouse rect.key {
+      fill: var(--color-mouse-bg);
+      stroke: var(--color-mouse-border);
+    }
+
+    .layer-Mouse .tap {
+      fill: var(--color-mouse-text);
+    }
+
+    .layer-Macro rect.key {
+      fill: var(--color-macro-bg);
+      stroke: var(--color-macro-border);
+    }
+
+    .layer-Macro .tap {
+      fill: var(--color-macro-text);
+    }
+
+    .layer-Pad rect.key {
+      fill: var(--color-pad-bg);
+      stroke: var(--color-pad-border);
+    }
+
+    .layer-Pad .tap {
+      fill: var(--color-pad-text);
+    }
+
+    /* Combos layer - keys underneath combo overlays */
+    .layer-Combos rect.key {
+      fill: var(--color-combo-key-bg);
+      stroke: var(--color-combo-key-border);
+    }
+
+    .layer-Combos .tap {
+      fill: var(--color-key-text);
+    }
+
+    /* Thumb key styling per layer - for indicating active layer */
+    .thumb-base rect.key {
+      fill: var(--color-thumb-base-bg);
+      stroke: var(--color-thumb-base-border);
+    }
+
+    .thumb-nav rect.key {
+      fill: var(--color-thumb-nav-bg);
+      stroke: var(--color-thumb-nav-border);
+    }
+
+    .thumb-fn rect.key {
+      fill: var(--color-thumb-fn-bg);
+      stroke: var(--color-thumb-fn-border);
+    }
+
+    .thumb-num rect.key {
+      fill: var(--color-thumb-num-bg);
+      stroke: var(--color-thumb-num-border);
+    }
+
+    .thumb-sys rect.key {
+      fill: var(--color-thumb-sys-bg);
+      stroke: var(--color-thumb-sys-border);
+    }
+
+    .thumb-macro rect.key {
+      fill: var(--color-thumb-macro-bg);
+      stroke: var(--color-thumb-macro-border);
+    }
+
+    .thumb-mouse rect.key {
+      fill: var(--color-thumb-mouse-bg);
+      stroke: var(--color-thumb-mouse-border);
+    }
+
+    .thumb-pad rect.key {
+      fill: var(--color-thumb-pad-bg);
+      stroke: var(--color-thumb-pad-border);
+    }
+
+    /* Active thumb key highlighting - use when layer is active */
+    .thumb-active rect.key {
+      fill: var(--color-thumb-active-bg);
+      stroke: var(--color-thumb-active-border);
+      stroke-width: 2;
+      box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+    }
+
+    .thumb-active .tap {
+      fill: var(--color-thumb-active-text);
+      font-weight: 700;
     }
 
     /* Home row modifier styling */
@@ -350,28 +747,45 @@ draw_config:
       stroke-width: 1;
       opacity: 0.8;
     }
-    
+
     path.combo {
       stroke: var(--color-combo-border);
       stroke-width: 1;
       fill: none;
     }
-    
+
     .combo .tap {
       fill: var(--color-combo-text);
       font-size: 16px;
     }
 
-    .combo .shifted,
-    .combo .hold {
-      font-size: 13px;
+     .combo .shifted,
+     .combo .hold {
+       font-size: 13px;
+     }
+
+    /* Keys underneath combos - distinct from regular base keys */
+    .combo-key rect.key {
+      fill: var(--color-combo-key-bg);
+      stroke: var(--color-combo-key-border);
     }
 
     /* Special key types */
     .trans rect.key {
-      opacity: 0.4;
+      fill: var(--color-trans-bg);
+      stroke: var(--color-trans-border);
+      opacity: var(--trans-opacity);
     }
-    
+
+    .trans .tap {
+      fill: var(--color-trans-text);
+    }
+
+    .trans .hold,
+    .trans .shifted {
+      fill: var(--color-trans-text);
+    }
+
     .ghost rect.key {
       opacity: 0.4;
       stroke-dasharray: 2,2;

@@ -107,3 +107,8 @@ ZMK_COMBO(semi,    &kp SEMI,      RB2 RB3,    DEF NAV NUM, COMBO_TERM_FAST, COMB
 * */
 
 // Pinky left empty on purpose
+
+
+
+// Both shifts pressed = Caps Lock
+ZMK_COMBO(caps_both, &kp CAPS, LM4 RM4, ALL, 50, 100)
