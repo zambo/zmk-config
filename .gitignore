@@ -6,3 +6,15 @@ firmware
 zephyr
 zmk
 draw/base.yaml
+
+# West-managed module directories
+eyelash_corne
+nice-view-gem
+zmk-new_corne
+
+# macOS files
+.DS_Store
+**/.DS_Store
+
+# Temporary/test files
+draw/test.yaml
