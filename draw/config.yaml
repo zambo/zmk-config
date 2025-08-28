@@ -68,40 +68,55 @@ parse_config:
     combo_rbrc: { hidden: true }
 
   zmk_keycode_map:
-    # custom mappings
-    LALT: Alt
-    RALT: Alt
-    LCTRL: Ctrl
-    RCTRL: Ctrl
-    LGUI: Gui
-    RGUI: Gui
-    LSHFT: Shift
-    RSHFT: Shift
+    # Enhanced modifiers with icons
+    LCTRL: $$mdi:apple-keyboard-control$$
+    RCTRL: $$mdi:apple-keyboard-control$$
+    LALT: $$mdi:apple-keyboard-option$$
+    RALT: $$mdi:apple-keyboard-option$$
+    LSHIFT: $$mdi:apple-keyboard-shift$$
+    RSHIFT: $$mdi:apple-keyboard-shift$$
+    LSHFT: $$mdi:apple-keyboard-shift$$
+    RSHFT: $$mdi:apple-keyboard-shift$$
+    LGUI: $$mdi:apple-keyboard-command$$
+    RGUI: $$mdi:apple-keyboard-command$$
 
-    BSPC: Bspc
-    DEL: Del
-    ESC: Esc
-    RET: Enter
-    SPACE: Spc
-    TAB: Tab
+    # Special keys with icons
+    BSPC: $$mdi:backspace$$
+    BACKSPACE: $$mdi:backspace$$
+    DEL: $$mdi:backspace-reverse-outline$$
+    DELETE: $$mdi:backspace-reverse-outline$$
+    ESC: $$mdi:keyboard-esc$$
+    RET: $$mdi:keyboard-return$$
+    ENTER: $$mdi:keyboard-return$$
+    SPACE: $$mdi:keyboard-space$$
+    TAB: $$mdi:keyboard-tab$$
 
-    PG_UP: PgUp
-    PG_DN: PgDn
-    INS: Ins
-    HOME: Home
-    END: End
+    # Navigation arrows with bold icons
+    UP: $$mdi:arrow-up-bold$$
+    DOWN: $$mdi:arrow-down-bold$$
+    LEFT: $$mdi:arrow-left-bold$$
+    RIGHT: $$mdi:arrow-right-bold$$
 
-    UP: ↑
-    DOWN: ↓
-    LEFT: ←
-    RIGHT: →
-
+    # Media controls
     C_MUTE: $$mdi:volume-off$$
     C_PP: $$mdi:play-pause$$
     C_VOL_UP: $$mdi:volume-high$$
-    C_VOL_DN: $$mdi:volume-medium$$
-    C_NEXT: $$mdi:skip-forward$$
-    C_PREV: $$mdi:skip-backward$$
+    C_VOL_DN: $$mdi:volume-low$$
+    C_NEXT: $$mdi:skip-next$$
+    C_PREV: $$mdi:skip-previous$$
+
+    # System keys
+    C_POWER: $$mdi:power-standby$$
+    C_BRI_UP: $$mdi:brightness-5$$
+    C_BRI_DN: $$mdi:brightness-7$$
+    CAPSLOCK: $$mdi:apple-keyboard-caps$$
+    CAPS: $$mdi:apple-keyboard-caps$$
+
+    PG_UP: $$mdi:transfer-up$$
+    PG_DN: $$mdi:transfer-down$$
+    HOME: $$mdi:format-horizontal-align-left$$
+    END: $$mdi:format-horizontal-align-right$$
+    INS: Ins
 
     # defaults
     AMPERSAND: "&"

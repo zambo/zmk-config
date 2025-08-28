@@ -6,33 +6,6 @@ build := absolute_path('.build')
 out := absolute_path('firmware')
 draw := absolute_path('draw')
 
-# parse combos.dtsi and adjust settings to not run out of slots
-_parse_combos:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    cconf="{{ config / 'combos.dtsi' }}"
-    if [[ -f $cconf ]]; then
-        # set MAX_COMBOS_PER_KEY to the most frequent combos count
-        count=$(
-            tail -n +10 $cconf |
-                grep -Eo '[LR][TMBH][0-9]' |
-                sort | uniq -c | sort -nr |
-                awk 'NR==1{print $1}'
-        )
-        sed -Ei "/CONFIG_ZMK_COMBO_MAX_COMBOS_PER_KEY/s/=.+/=$count/" "{{ config }}"/*.conf
-        echo "Setting MAX_COMBOS_PER_KEY to $count"
-
-        # set MAX_KEYS_PER_COMBO to the most frequent key count
-        count=$(
-            tail -n +10 $cconf |
-                grep -o -n '[LR][TMBH][0-9]' |
-                cut -d : -f 1 | uniq -c | sort -nr |
-                awk 'NR==1{print $1}'
-        )
-        sed -Ei "/CONFIG_ZMK_COMBO_MAX_KEYS_PER_COMBO/s/=.+/=$count/" "{{ config }}"/*.conf
-        echo "Setting MAX_KEYS_PER_COMBO to $count"
-    fi
-
 # parse build.yaml and filter targets by expression
 _parse_targets $expr:
     #!/usr/bin/env bash
@@ -57,8 +30,8 @@ _build_single $board $shield $snippet $artifact *west_args:
         mkdir -p "{{ out }}" && cp "$build_dir/zephyr/zmk.bin" "{{ out }}/$artifact.bin"
     fi
 
-# build firmware for matching targets
-build expr *west_args: _parse_combos
+# build firmware for matching targets (defaults to eyelash if no expr given)
+build expr="eyelash" *west_args:
     #!/usr/bin/env bash
     set -euo pipefail
     targets=$(just _parse_targets {{ expr }})
@@ -84,9 +57,12 @@ clean-nix:
 draw:
     #!/usr/bin/env bash
     set -euo pipefail
-    keymap -c "{{ draw }}/config.yaml" parse -z "{{ config }}/base.keymap" --virtual-layers Combos >"{{ draw }}/base.yaml"
+    keymap -c keymap_drawer.config.yaml parse -z "{{ config }}/eyelash_corne.keymap" --virtual-layers Combos >"{{ draw }}/base.yaml"
     yq -Yi '.combos.[].l = ["Combos"]' "{{ draw }}/base.yaml"
-    keymap -c "{{ draw }}/config.yaml" draw "{{ draw }}/base.yaml" -k "ferris/sweep" >"{{ draw }}/base.svg"
+    # Filter out combos with invalid key positions (>= 48 for 48-key layout)
+    yq -Yi '.combos = [.combos[] | select(all(.p[]; . < 48))]' "{{ draw }}/base.yaml"
+    yq -Yi '.layout = {"qmk_info_json": "eyelash_corne/config/eyelash_corne.json", "layout_name": "default_layout"}' "{{ draw }}/base.yaml"
+    keymap -c keymap_drawer.config.yaml draw "{{ draw }}/base.yaml" >"{{ draw }}/base.svg"
 
 # initialize west
 init:

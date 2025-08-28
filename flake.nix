@@ -51,6 +51,7 @@
           shellHook = ''
             export ZMK_BUILD_DIR=$(pwd)/.build;
             export ZMK_SRC_DIR=$(pwd)/zmk/app;
+            export KCONFIG_WERROR=n;
           '';
         };
       }

@@ -19,7 +19,7 @@
 manifest:
   defaults:
     remote: urob
-    revision: v0.3 # Pin everything to v0.3
+    revision: v0.2 # Pin everything to v0.2
 
   remotes:
     - name: urob
@@ -66,8 +66,8 @@ manifest:
         name-allowlist:
           - cmsis
           - hal_nordic
-          - hal_rpi_pico
-          - hal_stm32
+          # - hal_rpi_pico
+          # - hal_stm32
           - lvgl
           - tinycrypt
           # - nice_view_gem
