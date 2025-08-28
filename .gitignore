@@ -12,9 +12,7 @@ eyelash_corne
 nice-view-gem
 zmk-new_corne
 
-# macOS files
+# System files
 .DS_Store
-**/.DS_Store
-
-# Temporary/test files
-draw/test.yaml
+*.swp
+*.bak
