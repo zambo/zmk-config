@@ -27,10 +27,9 @@ ZMK_COMBO(l_esc,    &kp ESC,      LM4 LT4,    DEF NAV NUM, COMBO_TERM_SLOW, COMB
 // Symbols & _ \ %
 ZMK_COMBO(l_ampersand, &kp AMPS,   LT0 LM0,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt0+lm0 = & */
 
+ZMK_COMBO(l_percent,   &kp PERCENT,LM1 LB1,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt1+lm1 = % */
 ZMK_COMBO(l_underscore,&kp UNDER,  LM2 LB2,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt2+lm2 = _ */
 ZMK_COMBO(l_bslash,    &kp BSLH,   LM3 LB3,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt3+lm3 = \ */
-ZMK_COMBO(l_percent,   &kp PERCENT,LM4 LB4,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt4+lm4 = % */
-
 
 
 /******************************************************
