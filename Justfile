@@ -64,6 +64,17 @@ draw:
     yq -Yi '.layout = {"qmk_info_json": "eyelash_corne/config/eyelash_corne.json", "layout_name": "default_layout"}' "{{ draw }}/base.yaml"
     keymap -c keymap_drawer.config.yaml draw "{{ draw }}/base.yaml" >"{{ draw }}/base.svg"
 
+# watch keymap config and auto-redraw on changes
+watch:
+    #!/usr/bin/env bash
+    echo "Watching keymap_drawer.config.yaml for changes..."
+    echo "Press Ctrl+C to stop"
+    fswatch -o keymap_drawer.config.yaml | while read f; do
+        echo "Config changed, redrawing keymap..."
+        just draw
+        echo "✓ Keymap updated at $(date '+%H:%M:%S')"
+    done
+
 # initialize west
 init:
     west init -l config

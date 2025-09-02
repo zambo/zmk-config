@@ -1,4 +1,4 @@
-/*                KEY POSITIONS
+/*                key positions
 
   ╭─────────────────────╮ ╭─────────────────────╮
   │ LT4 LT3 LT2 LT1 LT0 │ │ RT0 RT1 RT2 RT3 RT4 │
@@ -13,6 +13,8 @@
 #define COMBO_IDLE_FAST 150
 #define COMBO_IDLE_SLOW 50
 
+#define ALL_LAYERS DEF NAV FN NUM MCR MIC PAD SYS
+#define ALL_EXC_PAD DEF NAV FN NUM MCR MIC SYS
 
 
 /******************************************************
@@ -20,36 +22,39 @@
  ******************************************************/
 
 // ESC, TAB, DEL
-ZMK_COMBO(l_tab,    &kp LS(TAB), LM1 LT1,    DEF NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* lt1 + lm1 = shift-tab */
-ZMK_COMBO(l_del,    &kp DEL,      LM2 LT2,    DEF NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* lt3 + lm3 = DEL */
-ZMK_COMBO(l_esc,    &kp ESC,      LM4 LT4,    DEF NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* lt5 + lm5 = esc */
+ZMK_COMBO(l_tab,    &kp TAB,      LM1 LT1,    ALL_LAYERS, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* lt1 + lm1 = shift-tab */
+ZMK_COMBO(l_del,    &kp DEL,      LM2 LT2,    ALL_LAYERS, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* lt3 + lm3 = DEL */
+ZMK_COMBO(l_esc,    &kp ESC,      LM4 LT4,    ALL_EXC_PAD, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* lt5 + lm5 = esc */
+
+// ESC position on PAD lauer goes back to DEF
+ZMK_COMBO(l_esc_pad, &to 0, LM4 LT4, PAD, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* lt5 + lm5 = esc */
 
 // Symbols & _ \ %
-ZMK_COMBO(l_ampersand, &kp AMPS,   LT0 LM0,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt0+lm0 = & */
+ZMK_COMBO(l_ampersand, &kp AMPS,   LT0 LM0,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt0+lm0 = & */
 
-ZMK_COMBO(l_percent,   &kp PERCENT,LM1 LB1,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt1+lm1 = % */
-ZMK_COMBO(l_underscore,&kp UNDER,  LM2 LB2,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt2+lm2 = _ */
-ZMK_COMBO(l_bslash,    &kp BSLH,   LM3 LB3,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt3+lm3 = \ */
-
+ZMK_COMBO(l_percent,   &kp PERCENT,LM0 LB0,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt1+lm1 = % */
+ZMK_COMBO(l_bslash,    &kp BSLH,   LM1 LB1,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt3+lm3 = \ */
+ZMK_COMBO(l_underscore,&kp UNDER,  LM2 LB2,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lt2+lm2 = _ */
+ZMK_COMBO(emoji_picker,&emoji_picker_macro, LM3 LB3, ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* lm3+lb3 = Emoji Picker */
 
 /******************************************************
  * VERTICAL INTERSECTIONS COMBOS - RIGHT HAND
  ******************************************************/
 
 // ESC, TAB, BSPC 
-ZMK_COMBO(r_tab,    &kp TAB,      RM1 RT1,    DEF NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* rt1 + rm1 = tab */
-ZMK_COMBO(r_bspc,   &kp BSPC,     RM2 RT2,    DEF NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* rt2 + rm2 = backspace */
-ZMK_COMBO(r_esc,    &kp ESC,      RM4 RT4,    DEF NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* rt4 + rm4 = esc */
+
+ZMK_COMBO(r_tab,    &kp LS(TAB),  RM1 RT1,    ALL_LAYERS, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* rt1 + rm1 = tab */
+ZMK_COMBO(r_bspc,   &kp BSPC,     RM2 RT2,    ALL_LAYERS, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* rt2 + rm2 = backspace */
+ZMK_COMBO(r_esc,    &kp ESC,      RM4 RT4,    ALL_LAYERS, COMBO_TERM_SLOW, COMBO_IDLE_SLOW) /* rt4 + rm4 = esc */
 
 // Symbols | " = \ @ `
-ZMK_COMBO(pipe,      &kp PIPE,    RT0 RM0,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* rt0+rm0 = | */
-ZMK_COMBO(quote,     &kp QUOT,    RT3 RM3,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* rt3+rm3 = " */
+ZMK_COMBO(pipe,      &kp PIPE,    RT0 RM0,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* rt0+rm0 = | */
+ZMK_COMBO(quote,     &kp QUOT,    RT3 RM3,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* rt3+rm3 = " */
 
-ZMK_COMBO(equals,    &kp EQL,     RM0 RB0,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* rm0+rb0 = = */
-ZMK_COMBO(fslash,    &kp FSLH,    RM1 RB1,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* rm1+rb1 = / */
-ZMK_COMBO(at,        &kp AT,      RM2 RB2,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* rm2+rb2 = @ */
-ZMK_COMBO(grave,     &kp GRAVE,   RM3 RB3,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* rm3+rb3 = ` */
-
+ZMK_COMBO(equals,    &kp EQL,     RM0 RB0,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* rm0+rb0 = = */
+ZMK_COMBO(fslash,    &kp FSLH,    RM1 RB1,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* rm1+rb1 = / */
+ZMK_COMBO(at,        &kp AT,      RM2 RB2,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* rm2+rb2 = @ */
+ZMK_COMBO(grave,     &kp GRAVE,   RM3 RB3,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST) /* rm3+rb3 = ` */
 /******************************************************
  * HORIZONTAL INTERSECTIONS COMBOS - both hands
  ******************************************************/
@@ -60,14 +65,14 @@ ZMK_COMBO(grave,     &kp GRAVE,   RM3 RB3,    DEF NAV NUM, COMBO_TERM_FAST, COMB
     * B: -                   +
 * */
 
-ZMK_COMBO(lt,      &kp LT,        LT0 LT1,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(gt,      &kp GT,        RT0 RT1,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(lt,      &kp LT,        LT0 LT1,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(gt,      &kp GT,        RT0 RT1,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
-ZMK_COMBO(caret,   &kp CARET,     LM0 LM1,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(dollar,  &kp DLLR,      RM0 RM1,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(caret,   &kp CARET,     LM0 LM1,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(dollar,  &kp DLLR,      RM0 RM1,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
-ZMK_COMBO(dash,    &kp MINUS,     LB0 LB1,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(plus,    &kp PLUS,      RB0 RB1,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(dash,    &kp MINUS,     LB0 LB1,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(plus,    &kp PLUS,      RB0 RB1,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
 
 /*  L1 + L2               R1 + R2
@@ -76,14 +81,14 @@ ZMK_COMBO(plus,    &kp PLUS,      RB0 RB1,    DEF NAV NUM, COMBO_TERM_FAST, COMB
     * B: [                   ]
 * */
 
-ZMK_COMBO(lcurly,   &kp LBRC,     LT1 LT2,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(rcurly,   &kp RBRC,     RT1 RT2,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(lcurly,   &kp LBRC,     LT1 LT2,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(rcurly,   &kp RBRC,     RT1 RT2,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
-ZMK_COMBO(lpar,     &kp LPAR,     LM1 LM2,     DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(rpar,     &kp RPAR,     RM1 RM2,     DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(lpar,     &kp LPAR,     LM1 LM2,     ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(rpar,     &kp RPAR,     RM1 RM2,     ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
-ZMK_COMBO(lbrack,   &kp LBKT,     LB1 LB2,     DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(rbrack,   &kp RBKT,     RB1 RB2,     DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(lbrack,   &kp LBKT,     LB1 LB2,     ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(rbrack,   &kp RBKT,     RB1 RB2,     ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
 /*  L2 + L3               R2 + R3
     * T: *                   #
@@ -91,14 +96,14 @@ ZMK_COMBO(rbrack,   &kp RBKT,     RB1 RB2,     DEF NAV NUM, COMBO_TERM_FAST, COM
     * B: ~                   ;
 * */
 
-ZMK_COMBO(star,    &kp STAR,      LT2 LT3,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(hash,    &kp HASH,      RT2 RT3,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(star,    &kp STAR,      LT2 LT3,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(hash,    &kp HASH,      RT2 RT3,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
-ZMK_COMBO(tilde,   &kp TILDE,     LM2 LM3,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(colon,   &kp COLON,     RM2 RM3,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(tilde,   &kp TILDE,     LM2 LM3,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(colon,   &kp COLON,     RM2 RM3,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
-ZMK_COMBO(excl,    &kp EXCL,      LB2 LB3,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(semi,    &kp SEMI,      RB2 RB3,    DEF NAV NUM, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(excl,    &kp EXCL,      LB2 LB3,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(semi,    &kp SEMI,      RB2 RB3,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
 /*  L3 + L4               R3 + R4
     * T: XXX                XXX
@@ -110,5 +115,8 @@ ZMK_COMBO(semi,    &kp SEMI,      RB2 RB3,    DEF NAV NUM, COMBO_TERM_FAST, COMB
 
 
 
+// Leader key combo - disabled, using layer-tap instead
+// ZMK_COMBO(leader,  &leader,       LT3 LM3,    ALL_LAYERS, COMBO_TERM_FAST, COMBO_IDLE_FAST)
+
 // Both shifts pressed = Caps Lock
-ZMK_COMBO(caps_both, &kp CAPS, LM4 RM4, ALL, 50, 100)
+/* ZMK_COMBO(caps_both, &kp CAPS, LM4 RM4, ALL, 50, 100) */

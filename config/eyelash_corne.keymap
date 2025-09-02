@@ -1,3 +1,6 @@
+#define CONFIG_WIRELESS
+#define HOST_OS 2
+
 #include <behaviors.dtsi>
 #include <behaviors/unicode.dtsi> // Requires zmk-unicode module.
 #include <zmk-helpers/helper.h> // Requires zmk-helpers module.
@@ -6,10 +9,14 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
-#define CONFIG_WIRELESS
-#define HOST_OS 2
 
+#include <dt-bindings/zmk-unicode/uc.h>
 #include "zmk-helpers/helper.h"
+
+// Configure Unicode for macOS
+&uc {
+    default-mode = <UC_MODE_MACOS>;
+};
 #include "zmk-helpers/key-labels/eyelash42.h"
 #include <behaviors/num_word.dtsi> // Requires auto-layer module.
 #include <zmk-unicode/keys/greek.h>
@@ -20,10 +27,10 @@
 #define NAV   1
 #define FN    2
 #define NUM   3
-#define SYS   4
+#define MCR   4
 #define MIC   5
 #define PAD   6
-#define MCR   7
+#define SYS   7
 
 #define XXX &none
 #define ___ &trans
@@ -105,6 +112,7 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
 
 /* Combos, leader key sequences, mouse emulation */
 
+#include <behaviors/unicode.dtsi> // Requires zmk-unicode module.
 #include "combos.dtsi" // Must be sourced after HRM-combo hack.
 #include "leader.dtsi"
 #include "mouse.dtsi"
@@ -162,7 +170,6 @@ ZMK_ADAPTIVE_KEY(
 &caps_word { // Mods deactivate caps-word, requires PR #1451. [TODO: rebase]
   /delete-property/ ignore-modifiers;
 };
-
 // Tap: num-word | double-tap: sticky num-layer | Hold: num-layer.
 #define SMART_NUM &smart_num NUM 0
 ZMK_HOLD_TAP(smart_num, bindings = <&mo>, <&num_dance>; flavor = "balanced";
@@ -177,6 +184,8 @@ ZMK_HOLD_TAP(smart_pad, bindings = <&mo>, <&pad_dance>; flavor = "balanced";
 // ZMK_TAP_DANCE(pad_dance, bindings = <&kp ESC>, <&to PAD>;
 ZMK_TAP_DANCE(pad_dance, bindings = <&kp ESC>, <&to PAD>;
               tapping-term-ms = <200>;)
+
+// Removed SMART_LEADER - using direct leader key binding instead
 
 // Smart-mouse, requires tri-state module.
 ZMK_TRI_STATE(
@@ -259,6 +268,26 @@ ZMK_TRI_STATE(
 ZMK_TRI_STATE(swapper, bindings = <&kt LGUI>, <&kp TAB>, <&kt LGUI>;
               ignored-key-positions = <LT2 RT2 RM1 RM2 RM3>;)
 
+// Leader/SYS hold-tap with double-tap for Alt+0
+/ {
+    behaviors {
+        leader_ht: hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            bindings = <&mo>, <&leader_dt>;
+        };
+        leader_dt: tap_dance {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <300>;
+            bindings = <&leader>, <&kp LA(N0)>;
+        };
+    };
+};
+
 // Define mod-morph with a *single* mod trigger for less repetition.
 #define SIMPLE_MORPH(NAME, MOD, BINDING1, BINDING2)                            \
   ZMK_MOD_MORPH(NAME, mods = <(MOD_L##MOD | MOD_R##MOD)>;                      \
@@ -283,6 +312,8 @@ SIMPLE_MORPH(rpar_gt, SFT, &kp RPAR, &kp GT)
 SIMPLE_MORPH(spc_morph, SFT, &kp SPACE, &dot_spc)
 ZMK_HOLD_TAP(lt_spc, bindings = <&mo>, <&spc_morph>; flavor = "balanced";
              tapping-term-ms = <200>; quick-tap-ms = <QUICK_TAP_MS>;)
+// NOTE: If modifier+layer+arrow keys don't work reliably, try:
+//       flavor = "hold-preferred"; hold-trigger-on-release; hold-trigger-key-positions = <KEYS_L>;
 
 // Tap: backspace | Lshft + tap: delete | Rshft + tap: shift-delete.
 ZMK_MOD_MORPH(bs_del, bindings = <&kp BSPC>, <&kp DEL>;
@@ -316,6 +347,20 @@ ZMK_TAP_DANCE(copy_cut, bindings = <&kp LG(C)>, <&kp LG(X)>;
 #define APP_EXPOSE &kp LC(DOWN)           // App Exposé (current app windows)
 #define CLOSE_WIN &kp LG(W)               // Close window/tab
 #define KEY_REPEAT &key_repeat            // Simple key repeat
+
+// Emoji picker macro - avoids nested parentheses parsing issues
+/ {
+    macros {
+        emoji_picker_macro: emoji_picker_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            bindings = <&macro_press &kp LCTRL &kp LGUI>
+                     , <&macro_tap &kp SPACE>
+                     , <&macro_release &kp LCTRL &kp LGUI>;
+        };
+    };
+};
 #define RPT       &key_repeat             // Local alias for testing
 
 / {
@@ -323,8 +368,14 @@ ZMK_TAP_DANCE(copy_cut, bindings = <&kp LG(C)>, <&kp LG(X)>;
         mcr_repeat: mcr_repeat {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&lt MCR KEY_REPEAT>;  // Macro wrapper fixes keymap-drawer parsing bug with &key_repeat in &lt
+            bindings = <&lt SYS KEY_REPEAT>;  // Macro wrapper fixes keymap-drawer parsing bug with &key_repeat in &lt
         };
+        leader_macro: leader_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&leader>;
+        };
+
     };
 };
 
@@ -346,7 +397,7 @@ ZMK_TAP_DANCE(copy_cut, bindings = <&kp LG(C)>, <&kp LG(X)>;
 // #define N_HMR4     &hmr HMR_4 &meh A
 // #define N_HMR5     &hmr HMR_5 &meh XXX
 
-ZMK_CONDITIONAL_LAYER(sys, FN NUM, SYS) // FN + NUM --> SYS.
+// ZMK_CONDITIONAL_LAYER(sys, FN NUM, SYS) // FN + NUM --> SYS.
 
 // RGB layer indication - colors change when entering layers - DISABLED FOR NOW
 /* ZMK_CONDITIONAL_LAYER(nav_color, NAV, rgb_nav)
@@ -367,7 +418,7 @@ ZMK_LAYER(Base,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ╭────────╮ ╰────────┼────────┼────────╯   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     XXX           &kp Z         &kp X         &kp C         &kp D         &kp V             ___                 J_DW                  &kp K         &kp H         &comma_morph  &dot_morph    &qexcl        &kp SQT
 //╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼─────────────┤   ╰────────╯          ╰────────╯            ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                              SMART_PAD     &mcr_repeat       &lt_spc NAV 0                                               &lt PAD RET   SMART_NUM   MAGIC_SHIFT
+                                                                                                 SMART_PAD     &leader_ht SYS 0   &lt_spc NAV 0                                               &lt PAD RET   SMART_NUM   MAGIC_SHIFT
 //                                          ╰─────────────┴─────────────┴─────────────╯                                             ╰─────────────┴─────────────┴─────────────╯
 , &volume_encoder
 )
@@ -388,12 +439,12 @@ ZMK_LAYER(Fn,
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                       ╭────────╮           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
     &kp C_PREV    &kp F9        &kp F10       &kp F11       &kp F12       ___                                   ___                  ___           ___           ___           ___           ___           &kp C_NEXT
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤              ╭────────┼────────┼────────╮  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &kp C_MUTE    &kp F5        &kp F6        &kp F7        &kp F8        ___                          ___      ___      ___          &kp HMR_0     &kp HMR_1     &kp HMR_2     &kp HMR_3     &kp HMR_4     &kp HMR_5 
+    &kp C_MUTE    &kp F5        &kp F6        &kp F7        &kp F8        ___                          ___      ___      ___         ___           ___           ___           ___           ___           ___ 
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ╭────────╮ ╰────────┼────────┼────────╯  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &kp C_PP      &kp F1        &kp F2        &kp F3        &kp F4        ___               ___                 ___                  ___           ___           ___           ___           ___           ___
 //╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼─────────────┤   ╰────────╯          ╰────────╯           ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                               ___           ___           ___                                                        ___           ___           CANCEL
-//                                          ╰─────────────┴─────────────┴─────────────╯                                             ╰─────────────┴─────────────┴─────────────╯
+//                                          ╰─────────────┴─────────────┴─────────────╯                                            ╰─────────────┴─────────────┴─────────────╯
 , &volume_encoder
 )
 
@@ -409,7 +460,7 @@ ZMK_LAYER(Num,
 //                                          ╰─────────────┴─────────────┴─────────────╯                                             ╰─────────────┴─────────────┴─────────────╯
 )
 
-ZMK_LAYER(Sys,
+ZMK_LAYER(Macro,
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                       ╭────────╮            ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
     ___           &kp ASTRSK    &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_EQUAL                          ___                   ___           ___           ___           ___           ___           ___
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤              ╭────────┼────────┼────────╮   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
@@ -446,7 +497,7 @@ ZMK_LAYER(Pad,
 //                                          ╰─────────────┴─────────────┴─────────────╯                                             ╰─────────────┴─────────────┴─────────────╯
 )
 
-ZMK_LAYER(Macro,
+ZMK_LAYER(Sys,
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                       ╭────────╮            ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
     ___            _BT_SEL_KEYS_                                                                                ___                   &rgb_ug RGB_TOG &rgb_ug RGB_BRI &rgb_ug RGB_BRD &rgb_ug RGB_HUI &rgb_ug RGB_HUD ___
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤              ╭────────┼────────┼────────╮   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
@@ -455,7 +506,7 @@ ZMK_LAYER(Macro,
     ___            ___          ___           ___           ___           ___               ___                 ___                   ___           ___           ___           ___           ___           ___
 //╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼─────────────┤   ╰────────╯          ╰────────╯            ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                               ___           ___           ___                                                         ___           ___           ___
-//                                          ╰─────────────┴─────────────┴─────────────╯                                             ╰─────────────┴─────────────┴─────────────╯
+//                                          ╰─────────────┴─────────────┴─────────────╯                                             ╰─────────────┴─────────────╯
 , &volume_encoder
 )
 
