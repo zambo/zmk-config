@@ -41,6 +41,29 @@ parse_config:
     "&swapper": $$mdi:swap-horizontal$$
     "&select_word": $$mdi:select-all$$
     "&select_line": $$mdi:format-line-height$$
+
+    # Navigation combos
+    "&kp LG(LS(LBKT))": $$mdi:tab-minus$$     # Previous tab
+    "&kp LG(LS(RBKT))": $$mdi:tab-plus$$      # Next tab
+    "&kp LG(LBKT)": $$mdi:arrow-left$$        # Navigate back
+    "&kp LG(RBKT)": $$mdi:arrow-right$$       # Navigate forward
+
+    # Emoji picker
+    "&emoji_picker_macro": "😊"
+
+    # Layer switching
+    "&to 0": $$mdi:keyboard-esc$$  # Go to base layer (ESC on PAD layer)
+    
+    # Tab combos - specific behaviors
+    "&kp TAB": $$mdi:keyboard-tab$$        # Regular tab (left combo)
+    "&kp LS(TAB)": $$mdi:keyboard-tab-reverse$$ # Shift+Tab/reverse tab (right combo)
+    
+    # Combo-specific mappings
+    "l_tab": $$mdi:keyboard-tab$$          # Left tab combo name
+    "r_tab": $$mdi:tab-unselected$$       # Right tab combo name
+    
+    # Homerow modifier aliases
+    HMR_0: $$mdi:star-four-points$$ # Hyper key
     "&comma_morph":
       tap: ","
       shifted: ";"
@@ -218,12 +241,16 @@ parse_config:
 
     # Special modifier combinations
     LS(LC(LALT)): $$mdi:triangle$$ # Meh key
+    LG(LS(LC(LALT))): $$mdi:star-four-points$$ # Hyper key
+    HYP: $$mdi:star-four-points$$ # Hyper key alias
 
     # Custom application and system keys
     GLOBE: $$mdi:web$$
     APP_EXPOSE: $$mdi:view-grid$$
     MISSION_CTL: $$mdi:view-dashboard$$
-    APP_SWITCH: $$mdi:dock-window$$
+    APP_SWITCH: $$mdi:layers-outline$$ # Window switcher within app
+    "&kp LG(GRAVE)": $$mdi:layers-outline$$ # Cmd+` for app window switching
+    "LG(GRAVE)": $$mdi:layers-outline$$ # Raw key combination
     SMART_PAD: $$mdi:gesture-tap$$
     MAGIC_SHIFT: $$mdi:auto-fix$$
     KEY_REPEAT: $$mdi:repeat$$
@@ -357,6 +384,10 @@ parse_config:
     GRAVE:
       tap: "`"
       shifted: "~"
+      
+    # Fix for LG(GRAVE) combination display  
+    LGUI_GRAVE: $$mdi:layers-outline$$
+    GUI_GRAVE: $$mdi:layers-outline$$
 
     # Number keys with symbols
     N1:
@@ -394,8 +425,9 @@ parse_config:
     ENTER:
       type: enter
       tap: $$mdi:keyboard-return$$
-    ESC: $$mdi:repeat$$
+    ESC: $$mdi:keyboard-esc$$
     TAB: $$mdi:keyboard-tab$$
+    LS(TAB): $$mdi:keyboard-tab-reverse$$
     SPACE: $$mdi:keyboard-space$$
     BACKSPACE:
       type: backspace
@@ -430,6 +462,12 @@ parse_config:
     combo_tab:
       align: bottom
       offset: 0.1
+      draw_separate: true
+    l_tab:
+      tap: $$mdi:keyboard-tab$$
+      draw_separate: true
+    r_tab:
+      tap: $$mdi:keyboard-tab-reverse$$
       draw_separate: true
     combo_enter:
       align: right

@@ -47,11 +47,11 @@
 #define ENC_PRESS   LEC
 #define JOYSTICK    JS0 JS1 JS2 JS3 JS4
 
-#define J_UP U_MS_U
-#define J_DW U_MS_D
-#define J_LF U_MS_L
-#define J_RH U_MS_R
-#define J_CT &mkp LCLK
+#define J_UP &kp UP
+#define J_DW &kp DOWN
+#define J_LF &kp LEFT
+#define J_RH &kp RIGHT
+#define J_CT &kp SPACE
 
 // Meh key
 // #define MEH LS(LC(LALT))
@@ -283,7 +283,7 @@ ZMK_TRI_STATE(swapper, bindings = <&kt LGUI>, <&kp TAB>, <&kt LGUI>;
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <300>;
-            bindings = <&leader>, <&kp LA(N0)>;
+            bindings = <&leader>, <&leader2>, <&leader3>, <&kp LA(N0)>;
         };
     };
 };
@@ -418,7 +418,7 @@ ZMK_LAYER(Base,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ╭────────╮ ╰────────┼────────┼────────╯   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     XXX           &kp Z         &kp X         &kp C         &kp D         &kp V             ___                 J_DW                  &kp K         &kp H         &comma_morph  &dot_morph    &qexcl        &kp SQT
 //╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼─────────────┤   ╰────────╯          ╰────────╯            ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                                                                 SMART_PAD     &leader_ht SYS 0   &lt_spc NAV 0                                               &lt PAD RET   SMART_NUM   MAGIC_SHIFT
+                                              SMART_PAD     &leader_ht SYS 0   &lt_spc NAV 0                                          &lt PAD RET   SMART_NUM   MAGIC_SHIFT
 //                                          ╰─────────────┴─────────────┴─────────────╯                                             ╰─────────────┴─────────────┴─────────────╯
 , &volume_encoder
 )
@@ -482,6 +482,7 @@ ZMK_LAYER(Mouse,
 //╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼─────────────┤   ╰────────╯          ╰────────╯            ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                               ___           ___           ___                                                         U_WH_U        U_WH_D        &to DEF
 //                                          ╰─────────────┴─────────────┴─────────────╯                                             ╰─────────────┴─────────────┴─────────────╯
+, &mouse_encoder
 )
 
 

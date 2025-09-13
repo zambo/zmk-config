@@ -13,6 +13,12 @@
             #sensor-binding-cells = <0>;
             bindings = <&kp C_VOL_UP>, <&kp C_VOL_DN>;
         };
+        
+        mouse_encoder: mouse_encoder {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp RIGHT>, <&kp LEFT>;
+        };
     };
 };
 

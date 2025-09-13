@@ -14,8 +14,40 @@
         }; \
     };
 
-// Alt + number workspace shortcuts using Colemak positions
-// Alt+0 is handled by double-tap on the tri-state behavior
+#undef ZMK_LEADER_SEQUENCE2
+#define ZMK_LEADER_SEQUENCE2(name, leader_bindings, leader_sequence) \
+    / { \
+        behaviors { \
+            leader2: leader2 { \
+                compatible = "zmk,behavior-leader-key"; \
+                #binding-cells = <0>; \
+                ignore-keys = <LSHFT RSHFT>; \
+                leader_sequence2_ ## name { \
+                    bindings = <leader_bindings>; \
+                    sequence = <leader_sequence>; \
+                }; \
+            }; \
+        }; \
+    };
+
+#undef ZMK_LEADER_SEQUENCE3
+#define ZMK_LEADER_SEQUENCE3(name, leader_bindings, leader_sequence) \
+    / { \
+        behaviors { \
+            leader3: leader3 { \
+                compatible = "zmk,behavior-leader-key"; \
+                #binding-cells = <0>; \
+                ignore-keys = <LSHFT RSHFT>; \
+                leader_sequence3_ ## name { \
+                    bindings = <leader_bindings>; \
+                    sequence = <leader_sequence>; \
+                }; \
+            }; \
+        }; \
+    };
+
+// Leader 1: Alt + number workspace shortcuts using Colemak positions
+// Alt+0 is handled by quad-tap on the tap-dance behavior
 ZMK_LEADER_SEQUENCE(alt1,  &kp LA(N1),  X)    // Position 1
 ZMK_LEADER_SEQUENCE(alt2,  &kp LA(N2),  C)    // Position 2  
 ZMK_LEADER_SEQUENCE(alt3,  &kp LA(N3),  D)    // Position 3
@@ -25,3 +57,43 @@ ZMK_LEADER_SEQUENCE(alt6,  &kp LA(N6),  T)    // Position 6
 ZMK_LEADER_SEQUENCE(alt7,  &kp LA(N7),  W)    // Position 7
 ZMK_LEADER_SEQUENCE(alt8,  &kp LA(N8),  F)    // Position 8
 ZMK_LEADER_SEQUENCE(alt9,  &kp LA(N9),  P)    // Position 9
+
+// Additional Alt shortcuts for N E I O
+ZMK_LEADER_SEQUENCE(alt_n,  &kp LA(N),  N)    
+ZMK_LEADER_SEQUENCE(alt_e,  &kp LA(E),  E)    
+ZMK_LEADER_SEQUENCE(alt_i,  &kp LA(I),  I)    
+ZMK_LEADER_SEQUENCE(alt_o,  &kp LA(O),  O)
+
+// Leader 2: Alt+Ctrl + number shortcuts (double tap)
+ZMK_LEADER_SEQUENCE2(altctrl1,  &kp LA(LC(N1)),  X)    // Position 1
+ZMK_LEADER_SEQUENCE2(altctrl2,  &kp LA(LC(N2)),  C)    // Position 2  
+ZMK_LEADER_SEQUENCE2(altctrl3,  &kp LA(LC(N3)),  D)    // Position 3
+ZMK_LEADER_SEQUENCE2(altctrl4,  &kp LA(LC(N4)),  R)    // Position 4
+ZMK_LEADER_SEQUENCE2(altctrl5,  &kp LA(LC(N5)),  S)    // Position 5
+ZMK_LEADER_SEQUENCE2(altctrl6,  &kp LA(LC(N6)),  T)    // Position 6
+ZMK_LEADER_SEQUENCE2(altctrl7,  &kp LA(LC(N7)),  W)    // Position 7
+ZMK_LEADER_SEQUENCE2(altctrl8,  &kp LA(LC(N8)),  F)    // Position 8
+ZMK_LEADER_SEQUENCE2(altctrl9,  &kp LA(LC(N9)),  P)    // Position 9
+
+// Additional Alt+Ctrl shortcuts for N E I O
+ZMK_LEADER_SEQUENCE2(altctrl_n,  &kp LA(LC(N)),  N)    
+ZMK_LEADER_SEQUENCE2(altctrl_e,  &kp LA(LC(E)),  E)    
+ZMK_LEADER_SEQUENCE2(altctrl_i,  &kp LA(LC(I)),  I)    
+ZMK_LEADER_SEQUENCE2(altctrl_o,  &kp LA(LC(O)),  O)
+
+// Leader 3: Alt+Ctrl+Shift + number shortcuts (triple tap)
+ZMK_LEADER_SEQUENCE3(altctrlsft1,  &kp LA(LC(LS(N1))),  X)    // Position 1
+ZMK_LEADER_SEQUENCE3(altctrlsft2,  &kp LA(LC(LS(N2))),  C)    // Position 2  
+ZMK_LEADER_SEQUENCE3(altctrlsft3,  &kp LA(LC(LS(N3))),  D)    // Position 3
+ZMK_LEADER_SEQUENCE3(altctrlsft4,  &kp LA(LC(LS(N4))),  R)    // Position 4
+ZMK_LEADER_SEQUENCE3(altctrlsft5,  &kp LA(LC(LS(N5))),  S)    // Position 5
+ZMK_LEADER_SEQUENCE3(altctrlsft6,  &kp LA(LC(LS(N6))),  T)    // Position 6
+ZMK_LEADER_SEQUENCE3(altctrlsft7,  &kp LA(LC(LS(N7))),  W)    // Position 7
+ZMK_LEADER_SEQUENCE3(altctrlsft8,  &kp LA(LC(LS(N8))),  F)    // Position 8
+ZMK_LEADER_SEQUENCE3(altctrlsft9,  &kp LA(LC(LS(N9))),  P)    // Position 9
+
+// Additional Alt+Ctrl+Shift shortcuts for N E I O
+ZMK_LEADER_SEQUENCE3(altctrlsft_n,  &kp LA(LC(LS(N))),  N)    
+ZMK_LEADER_SEQUENCE3(altctrlsft_e,  &kp LA(LC(LS(E))),  E)    
+ZMK_LEADER_SEQUENCE3(altctrlsft_i,  &kp LA(LC(LS(I))),  I)    
+ZMK_LEADER_SEQUENCE3(altctrlsft_o,  &kp LA(LC(LS(O))),  O)
